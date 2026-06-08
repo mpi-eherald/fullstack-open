@@ -1,6 +1,6 @@
 import Person from './Person'
 
-const Persons = ({ persons, filterBy }) => {
+const Persons = ({ persons, filterBy, handleDelete }) => {
   return (
     <div>
       {persons
@@ -10,7 +10,7 @@ const Persons = ({ persons, filterBy }) => {
         .includes(filterBy)
         )
         .map(person => 
-          <Person key={ person.name } person={ person } />
+          <Person key={ person.name } person={ person } handleDeletePerson={ () => handleDelete(person.id) } />
         )
       }
     </div>

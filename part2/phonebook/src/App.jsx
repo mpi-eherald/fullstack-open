@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Person from './components/Person'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -12,20 +12,12 @@ const App = () => {
   const [filterBy, setFilterBy] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then((response) => {
-        setPersons(response.data)
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
-
-  const handleNameChange = (event) => {
-    setNewName(event.target.value)
-  }
-
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value)
-  }
 
   const handleAddPerson = (event) => {
     event.preventDefault()
@@ -41,10 +33,27 @@ const App = () => {
         number: newNumber
       }
 
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
+      personService
+        .create(personObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        })
     }
+  }
+
+  const handleDelete = (id) => {
+    console.log(id)
+    personService.deleteContact(id)
+  }
+
+  const handleNameChange = (event) => {
+    setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
   }
 
   const handleFilterBy = (event) => {
@@ -77,6 +86,7 @@ const App = () => {
       <Persons
         persons={ persons }
         filterBy={ filterBy }
+        handleDelete={ handleDelete }
       />
 
     </div>
