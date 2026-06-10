@@ -25,8 +25,27 @@ const App = () => {
     const foundMatch = persons.find((person) => person.name === newName)
 
     if (foundMatch) {
-      alert(`${newName} is already added to phonebook`)
-      setNewName('')
+      const updateNumber = window.confirm(`${newName} is already in the phonebook. Update phone number?`)
+
+      if (updateNumber) {
+        const personObject = {
+          ...foundMatch,
+          number: newNumber
+        }
+
+        console.log(personObject)
+
+        personService
+          .update(personObject)
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person))
+          })
+
+        setNewName('')
+        setNewNumber('')
+      } else {
+        setNewName('')
+      }
     } else {
       const personObject = {
         name: newName,
@@ -43,9 +62,18 @@ const App = () => {
     }
   }
 
+
   const handleDelete = (id) => {
-    console.log(id)
-    personService.deleteContact(id)
+    const deletePerson = persons.find((person) => person.id === id).name
+    const deleteConfirmed = window.confirm(`Delete ${deletePerson}?`)
+    
+    if (deleteConfirmed) {
+    personService
+      .deleteContact(id)
+      .then(returnedPerson => {
+        setPersons(persons.filter(person => person.id !== id))
+      })
+    }
   }
 
   const handleNameChange = (event) => {
