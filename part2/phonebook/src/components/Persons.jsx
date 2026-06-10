@@ -2,7 +2,7 @@ import Person from './Person'
 
 const Persons = ({ persons, filterBy, handleDelete }) => {
   return (
-    <div>
+    <div className="persons">
       {persons
         .filter((person) =>
           person.name

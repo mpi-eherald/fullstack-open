@@ -22,8 +22,18 @@
     },
     {
       "name": "Elijah Herald",
-      "number": "513-226-5978",
+      "number": "513-789-4567",
       "id": "hjpiVStmWS0"
+    },
+    {
+      "name": "Katie Herald",
+      "number": "513-882-6566",
+      "id": "O19dEifpHdg"
+    },
+    {
+      "name": "Josh Herald",
+      "number": "513-546-7891",
+      "id": "xYYt3Xc9O_8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -8,23 +8,25 @@ const PersonForm = (
   }
 ) => {
   return (
-    <form onSubmit={ handleAddPerson }>
-    <div>
-      name: 
+    <form onSubmit={ handleAddPerson } className="formStyle">
+    <div className="inputMargin">
       <input
         value={ newName }
         onChange={ handleNameChange }
+        className="input"
+        placeholder="type a name"
       />
     </div>
     <div>
-      number:
         <input
           value={ newNumber }
           onChange={ handleNumberChange }
+          className="input"
+          placeholder="type a number"
         />
     </div>
     <div>
-      <button type="submit">add</button>
+      <button type="submit" className="formAddButton">add</button>
     </div>
   </form>
   )

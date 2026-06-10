@@ -4,12 +4,14 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterBy, setFilterBy] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -33,18 +35,20 @@ const App = () => {
           number: newNumber
         }
 
-        console.log(personObject)
-
         personService
           .update(personObject)
           .then(returnedPerson => {
             setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person))
+            setMessage(`${newName} successfully updated`)
+            setTimeout(() => {
+              setMessage(null)
+            }, 3000)
+            setNewName('')
+            setNewNumber('')
           })
-
-        setNewName('')
-        setNewNumber('')
       } else {
         setNewName('')
+        setNewNumber('')
       }
     } else {
       const personObject = {
@@ -56,6 +60,10 @@ const App = () => {
         .create(personObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setMessage(`${newName} successfully added`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 3000)
           setNewName('')
           setNewNumber('')
         })
@@ -91,13 +99,10 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h2>phonebook</h2>
+    <div className='mainBody'>
+      <h1>phonebook</h1>
 
-      <Filter
-        filterBy={ filterBy }
-        handleFilterBy={ handleFilterBy }
-      />
+      <Notification message={ message }/>
 
       <h2>add new</h2>
 
@@ -110,6 +115,11 @@ const App = () => {
       />
 
       <h2>numbers</h2>
+
+      <Filter
+        filterBy={ filterBy }
+        handleFilterBy={ handleFilterBy }
+      />
 
       <Persons
         persons={ persons }
