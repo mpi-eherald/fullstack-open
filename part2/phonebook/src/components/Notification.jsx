@@ -3,14 +3,18 @@ const Notification = ({ message }) => {
         return null
     }
 
-    const addClass = () => {
-        if (message.includes()) {
-
+    const addClass = (message) => {
+        if (message.includes("success")) {
+            return "success"
         }
+
+        return "fail"
     }
 
+    console.log(addClass(message))
+
     return (
-        <div className="message">
+        <div className={ addClass(message) }>
             { message }
         </div>
     )

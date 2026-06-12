@@ -5,9 +5,10 @@ const Persons = ({ persons, filterBy, handleDelete }) => {
     <div className="persons">
       {persons
         .filter((person) =>
-          person.name
-        .toLowerCase()
-        .includes(filterBy)
+          person
+            .name
+            .toLowerCase()
+            .includes(filterBy)
         )
         .map(person => 
           <Person key={ person.name } person={ person } handleDeletePerson={ () => handleDelete(person.id) } />

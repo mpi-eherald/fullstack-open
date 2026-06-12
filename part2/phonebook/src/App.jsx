@@ -46,6 +46,15 @@ const App = () => {
             setNewName('')
             setNewNumber('')
           })
+          .catch(error => {
+            setMessage(`${newName} is not present on the server`)
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
+            setPersons(persons.filter(person => person.name !== newName))
+            setNewName('')
+            setNewNumber('')
+          })
       } else {
         setNewName('')
         setNewNumber('')
@@ -80,6 +89,15 @@ const App = () => {
       .deleteContact(id)
       .then(returnedPerson => {
         setPersons(persons.filter(person => person.id !== id))
+      })
+      .catch(error => {
+        setMessage(`${deletePerson} has already been removed from the server`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+        setPersons(persons.filter(person => person.name !== deletePerson))
+        setNewName('')
+        setNewNumber('')
       })
     }
   }
