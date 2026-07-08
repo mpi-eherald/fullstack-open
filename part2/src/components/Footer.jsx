@@ -1,6 +1,6 @@
 const Footer = () => {
     const footerStyle = {
-        color: 'green',
+        color: 'grey',
         fontStyle: 'italic'
     }
 
@@ -8,7 +8,7 @@ const Footer = () => {
         <div style={ footerStyle }>
             <br />
             <p>
-                Note app, Department of Computer Science, University of Helsinki 2025
+                Note app, Elijah Herald 2026
             </p>
         </div>
     )
