@@ -25,8 +25,7 @@ const Note = mongoose.model('Note', noteSchema)
 //   important: true,
 // })
 
-// note
-//   .save()
+// note.save()
 //   .then(result => {
 //     console.log('note saved!')
 //     mongoose.connection.close()
