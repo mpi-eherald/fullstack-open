@@ -8,12 +8,10 @@ app.use(express.json())
 
 let notes = []
 
-// FIXME update new backend
 app.get('/', (request, response) => {
   response.send('<h1>Hello world!</h1>')
 })
 
-// FIXME update new backend
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
     response.json(notes)
