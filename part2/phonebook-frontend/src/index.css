@@ -28,7 +28,7 @@ h1, h2 {
     padding: 10px;
 }
 
-.persons {
+.people {
     display: flex;
     flex-direction: column;
 }
@@ -40,28 +40,42 @@ h1, h2 {
     margin-bottom: 10px;
     border: 1px solid black;
     border-radius: 10px;
-    padding: 5px;
+    padding: 5px 10px;
     user-select: none;
 }
 
 .personDeleteButton {
     margin-left: 10px;
-    color: lavenderblush;
-    background-color: red;
+    color: red;
+    background-color: lavenderblush;
     border: 1px solid red;
     border-radius: 5px;
-    padding: 5px 10px 5px;
+    padding: 3px 10px;
     cursor: pointer;
+}
+
+.personDeleteButton:hover {
+    color: lavenderblush;
+    background-color: red;
+    border-radius: 6px;
+    transform: scale(1.1);
 }
 
 .formAddButton {
     margin-top: 10px;
-    color: honeydew;
-    background-color: green;
+    color: green;
+    background-color: honeydew;
     border: 1px solid green;
     border-radius: 5px;
-    padding: 5px 10px 5px;
+    padding: 5px 10px;
     cursor: pointer;
+}
+
+.formAddButton:hover {
+    color: honeydew;
+    background-color: green;
+    border-radius: 6px;
+    transform: scale(1.1);
 }
 
 .formStyle {

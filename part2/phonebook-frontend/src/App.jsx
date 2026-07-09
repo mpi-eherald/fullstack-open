@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import Person from './components/Person'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
-import Persons from './components/Persons'
-import personService from './services/persons'
+import People from './components/People'
+import personService from './services/people'
 import Notification from './components/Notification'
 
 const App = () => {
-  const [persons, setPersons] = useState([])
+  const [people, setPeople] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterBy, setFilterBy] = useState('')
@@ -16,15 +16,15 @@ const App = () => {
   useEffect(() => {
     personService
       .getAll()
-      .then(initialPersons => {
-        setPersons(initialPersons)
+      .then(initialPeople => {
+        setPeople(initialPeople)
       })
   }, [])
 
   const handleAddPerson = (event) => {
     event.preventDefault()
 
-    const foundMatch = persons.find((person) => person.name === newName)
+    const foundMatch = people.find((person) => person.name === newName)
 
     if (foundMatch) {
       const updateNumber = window.confirm(`${newName} is already in the phonebook. Update phone number?`)
@@ -38,7 +38,7 @@ const App = () => {
         personService
           .update(personObject)
           .then(returnedPerson => {
-            setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person))
+            setPeople(people.map(person => person.id === returnedPerson.id ? returnedPerson : person))
             setMessage(`${newName} successfully updated`)
             setTimeout(() => {
               setMessage(null)
@@ -51,7 +51,7 @@ const App = () => {
             setTimeout(() => {
               setMessage(null)
             }, 5000)
-            setPersons(persons.filter(person => person.name !== newName))
+            setPeople(people.filter(person => person.name !== newName))
             setNewName('')
             setNewNumber('')
           })
@@ -68,7 +68,7 @@ const App = () => {
       personService
         .create(personObject)
         .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson))
+          setPeople(people.concat(returnedPerson))
           setMessage(`${newName} successfully added`)
           setTimeout(() => {
             setMessage(null)
@@ -81,21 +81,21 @@ const App = () => {
 
 
   const handleDelete = (id) => {
-    const deletePerson = persons.find((person) => person.id === id).name
+    const deletePerson = people.find((person) => person.id === id).name
     const deleteConfirmed = window.confirm(`Delete ${deletePerson}?`)
     
     if (deleteConfirmed) {
     personService
       .deleteContact(id)
       .then(returnedPerson => {
-        setPersons(persons.filter(person => person.id !== id))
+        setPeople(people.filter(person => person.id !== id))
       })
       .catch(error => {
         setMessage(`${deletePerson} has already been removed from the server`)
         setTimeout(() => {
           setMessage(null)
         }, 5000)
-        setPersons(persons.filter(person => person.name !== deletePerson))
+        setPeople(people.filter(person => person.name !== deletePerson))
         setNewName('')
         setNewNumber('')
       })
@@ -139,8 +139,8 @@ const App = () => {
         handleFilterBy={ handleFilterBy }
       />
 
-      <Persons
-        persons={ persons }
+      <People
+        people={ people }
         filterBy={ filterBy }
         handleDelete={ handleDelete }
       />

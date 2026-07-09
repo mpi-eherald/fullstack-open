@@ -1,9 +1,9 @@
 import Person from './Person'
 
-const Persons = ({ persons, filterBy, handleDelete }) => {
+const People = ({ people, filterBy, handleDelete }) => {
   return (
-    <div className="persons">
-      {persons
+    <div className="people">
+      {people
         .filter((person) =>
           person
             .name
@@ -18,4 +18,4 @@ const Persons = ({ persons, filterBy, handleDelete }) => {
   )
 }
 
-export default Persons
+export default People
