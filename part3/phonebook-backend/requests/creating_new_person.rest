@@ -1,7 +1,7 @@
-POST https://fullstack-open-1-z9pw.onrender.com/api/persons
+POST http://localhost:3001/api/people
 Content-Type: application/json
 
 {
-  "name": "Elijah Herald",
-  "number": "513-226-5978"
+  "name": "Joe",
+  "number": "555-555-5555"
 }
